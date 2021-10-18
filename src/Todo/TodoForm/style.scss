@@ -1,0 +1,37 @@
+* {
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+}
+.form-control {
+	padding-top: 18px;
+	width: 608px;
+	margin: auto;
+	padding-bottom: 32px;
+	.form-input {
+		font-size: 14px;
+		font-family: 'Montserrat';
+		line-height: 17px;
+		font-weight: 400;
+		color: #828282;
+		padding: 20px 0 19px 12px;
+		width: 476px;
+		height: 56px;
+		border-radius: 12px;
+		border: 1px solid #bdbdbd;
+	}
+	.btn-add {
+		float: right;
+		box-shadow: '0px 2px 6px 0px rgb(127, 177, 243, 0.4)';
+		width: 109px;
+		height: 56px;
+		font-size: 14px;
+		font-weight: 600;
+		font-family: 'Montserrat';
+		line-height: 17px;
+		color: #ffffff;
+		background-color: #2f80ed;
+		border-radius: 12px;
+		border: 1px solid rgba(127, 177, 243, 0.4);
+	}
+}
