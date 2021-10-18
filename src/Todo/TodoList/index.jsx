@@ -3,6 +3,7 @@ import style from './style.scss';
 
 function TodoList({todos, handleDel, status, handletoggle}) {
 	const [toggleChange, setToggleChange] = useState(1);
+	const [checkDelAll, setCheckDelAll] = useState(false);
 	const [datas, setDatas] = useState([]);
 	const [todo, setTodo] = useState([]);
 	const [listData, setListData] = useState();
@@ -26,6 +27,11 @@ function TodoList({todos, handleDel, status, handletoggle}) {
 	};
 
 	useEffect(() => {
+		const check = datas?.filter((x) => x.isChecked !== false);
+		check?.length !== 0 ? setCheckDelAll(true) : setCheckDelAll(false);
+	}, [datas]);
+
+	useEffect(() => {
 		localStorage.setItem('todos', JSON.stringify(todo));
 	}, [todo]);
 
@@ -42,7 +48,6 @@ function TodoList({todos, handleDel, status, handletoggle}) {
 
 		setListData({...listData, list: newList});
 		if (evt.target.id) {
-			console.log('thinh');
 			setListData({...listData, list: dellAll});
 		}
 	};
@@ -80,9 +85,7 @@ function TodoList({todos, handleDel, status, handletoggle}) {
 			<div className='boder-bottom'></div>
 			<div className='content-tab'>
 				<div
-					className={
-						toggleChange === 1 ? 'content  active-content' : 'content'
-					}
+					className={toggleChange === 1 ? 'content  active-content' : 'content'}
 				>
 					{datas?.map((data, index) => (
 						<div className='checked-control' key={index}>
@@ -104,9 +107,7 @@ function TodoList({todos, handleDel, status, handletoggle}) {
 					))}
 				</div>
 				<div
-					className={
-						toggleChange === 2 ? 'content  active-content' : 'content'
-					}
+					className={toggleChange === 2 ? 'content  active-content' : 'content'}
 				>
 					{datas?.map(
 						(data, index) =>
@@ -134,9 +135,7 @@ function TodoList({todos, handleDel, status, handletoggle}) {
 
 			<div
 				className={
-					toggleChange === 3
-						? 'toggle-3 content  active-content'
-						: 'content'
+					toggleChange === 3 ? 'toggle-3 content  active-content' : 'content'
 				}
 			>
 				{datas?.map(
@@ -171,15 +170,16 @@ function TodoList({todos, handleDel, status, handletoggle}) {
 							</div>
 						)
 				)}
-
-				<button
-					className='material-icons'
-					id='delAll'
-					onClick={handleDelete}
-				>
-					<span className='btn-all material-icons'>delete_outline </span>{' '}
-					delete all
-				</button>
+				{checkDelAll === true && (
+					<button className='material-icons' id='delAll' onClick={handleDelete}>
+						<span className='btn-all material-icons'>delete_outline </span> delete
+						all
+					</button>
+				)}
+				{/* <button className='material-icons' id='delAll' onClick={handleDelete}>
+					<span className='btn-all material-icons'>delete_outline </span> delete
+					all
+				</button> */}
 			</div>
 		</div>
 	);
